@@ -6,7 +6,7 @@ const AlbumSchema = new Schema(
     name: { type: String, require: true },
     group: { type: String, require: true },
     year: { type: String, require: true },
-    gender: { type: String, require: true },
+    songs: { type: String, require: true },
   },
   { timestamps: true }
 );
