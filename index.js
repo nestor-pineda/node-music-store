@@ -4,7 +4,10 @@ const logger = require("morgan");
 // DB conexion import
 const { connect } = require("./app/config/database");
 // Routes imports
+const users = require("./app/api/routes/user.rotues");
+const categories = require("./app/api/routes/categories.routes");
 const albums = require("./app/api/routes/albums.routes");
+
 // Other imports
 const HTTPSTATUSCODE = require("./app/utils/httpStatusCode");
 const cors = require("cors");
@@ -38,7 +41,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger("dev"));
 
 // Routes import definition
-// app.use("/albums", albums);
+app.use("/users", users);
+app.use("/categories", categories);
+app.use("/albums", albums);
 
 // Manage Error messages
 app.use((req, res, next) => {
@@ -47,6 +52,8 @@ app.use((req, res, next) => {
   err.message = HTTPSTATUSCODE[404];
   next(err);
 });
+
+app.set("secretKey", "nodeRestApi"); // jwt secret token
 
 // Handle errors
 app.use((err, req, res, next) => {
